@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/stevebartholomew/matasano-crypto-challenge/onetwo"
+	"github.com/stevebartholomew/matasano-crypto-challenge/onethree"
 )
 
 func main() {
-	onetwo.Run()
+	onethree.Run()
 }

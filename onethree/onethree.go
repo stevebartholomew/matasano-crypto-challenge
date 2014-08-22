@@ -2,22 +2,26 @@ package onethree
 
 import (
 	"encoding/hex"
+	_"encoding/binary"
 	"fmt"
 	"strings"
 	"github.com/stevebartholomew/matasano-crypto-challenge/onetwo"
+	"os/exec"
+	"strconv"
 )
 
-var parts = []string{"ed", "ing", "th", "ey", "ent"}
+const DICT_PATH = "/usr/share/dict/words"
 
 func Rank(phrase string) int {
 	rank := 0
 
 	words := strings.Split(phrase, " ")
-
 	for _, word := range words {
-		for _, part := range parts {
-			if strings.Contains(word, part) {
-				print(word)
+		occurances, err := exec.Command("grep", "-wciF", string(word), DICT_PATH).Output()
+
+		if err == nil {
+			if strconv.Atoi(string(occurances)) == "1" {
+				print("MATCH")
 				rank++
 			}
 		}

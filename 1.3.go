@@ -1,11 +1,11 @@
-package onethree
+package main
 
 import (
 	"encoding/hex"
 	_"encoding/binary"
 	"fmt"
 	"strings"
-	"github.com/stevebartholomew/matasano-crypto-challenge/onetwo"
+	"github.com/stevebartholomew/matasano-crypto-challenge/xor"
 	"os/exec"
 	"strconv"
 	"regexp"
@@ -33,7 +33,7 @@ func Rank(phrase string) int {
 	return rank
 }
 
-func Run() {
+func main() {
 	input, _ := hex.DecodeString("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")
 	results := make(map[string]int)
 
@@ -44,7 +44,7 @@ func Run() {
 			keyBytes[i] = byte(charIndex)
 		}
 
-		decodedPhrase := fmt.Sprintf("%s", onetwo.FixedXOR(input, keyBytes))
+		decodedPhrase := fmt.Sprintf("%s", xor.SingleByte(input, keyBytes))
 
 		rank := Rank(decodedPhrase)
 
